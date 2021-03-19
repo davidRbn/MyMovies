@@ -2,27 +2,34 @@ import React, { useCallback, useEffect, useState } from 'react'
 import MovieList from './movieList/MovieList'
 import apiMovie,{apiMovieMap, apiTvMap} from '../conf/api.movies'
 
-const Movies = () => {
+const Home = () => {
+
 
   const [movieListUpcomming,setMovieListUpcomming] = useState({
       movies:null,
+      typeMovie:'',
+      title:'',
       loaded:false
   })
 
   const [tvListLatest,setTvListLatest] = useState({
       movies:null,
+      typeMovie:'',
+      title:'',
       loaded:false
   })
 
   const updtateMovies = (movies) =>{
     setMovieListUpcomming({
       movies,
+      typeMovie:'movie',
       title:'Fims à venir',
      loaded:true})
  } 
  const updtateTv = (movies) => {
      setTvListLatest({
          movies,
+         typeMovie:'tv',
          title:'Séries',
          loaded:true
      })
@@ -46,6 +53,8 @@ const getTvLatest = useCallback(()=> {
         updtateTv(tv)
     })
 },[])
+ 
+
 
  useEffect(() =>{
        getMoviesUpcomming()
@@ -60,4 +69,4 @@ const getTvLatest = useCallback(()=> {
     )
 }
 
-export default Movies
+export default Home

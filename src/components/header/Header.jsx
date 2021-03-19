@@ -9,6 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Auth from './auth/Auth';
 import SearchBar from './searchBar/searchBar';
+import { Link } from 'react-router-dom';
 
 
 const Header = () => {
@@ -31,6 +32,7 @@ const Header = () => {
         },
         title: {
           flexGrow: 1,
+          
         },
       }));  
     
@@ -45,7 +47,7 @@ const Header = () => {
                 <MenuIcon />
               </IconButton>
               <Typography variant="h6" className={classes.title}>
-                MYmovies
+              <Link style={{color:'#fff',textDecoration:'none'}} to='/'>MYmovies</Link>  
               </Typography>
               <Button onClick={e => searchBarDisplay(e)} color="inherit"><IconSearch/></Button>
               <Button color="inherit"><Auth/></Button>

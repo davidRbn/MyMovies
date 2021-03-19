@@ -1,11 +1,11 @@
 import './App.css';
-import {Header,Movies} from './components';
+import {Header,Router} from './components';
 
 function App() {
   return (
     <div>
       <Header/>
-      <Movies/>
+      <Router/>
     </div>
   );
 }
