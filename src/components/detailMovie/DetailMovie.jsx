@@ -22,7 +22,7 @@ const DetailMovie = (props) => {
 
 
   const getMovieDetail = useCallback( () => {
-       apiMovie.get(`${typeMovie}/${id}?language=fr-FR/`)
+       apiMovie.get(`${typeMovie}/${id}?language=fr`)
               .then(res => res.data)
               .then(m => {
                   const movies = apiMovieMap(m)
@@ -35,7 +35,7 @@ const DetailMovie = (props) => {
         getMovieDetail()
   },[getMovieDetail])
 
- 
+  console.log(movieDetail) 
 
     return(
         <div className='detailMovie'>

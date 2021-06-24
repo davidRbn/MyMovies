@@ -1,69 +1,27 @@
 import React from 'react';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
-import IconButton from '@material-ui/core/IconButton';
-import StarBorderIcon from '@material-ui/icons/StarBorder';
 import { useHistory } from 'react-router';
-import  {detailMovie, detailTv} from '../../conf/detail.movie';
+import  { handleMovieTv } from '../../conf/detail.movie';
+import StarFavoris from '../../starFavoris/StarFavoris';
+import styles from '../../styles/styles';
 
 
 
 const MovieList = ({movieList}) => {
 
   let history = useHistory()
-  
-  
-    // const themeMovieList = createMuiTheme({
-    //   overrides: {
-    //     MuiGridListTile: {
-    //       root: {
-    //         width:'170px',
-    //         height: '230px',
-    //         padding:'2px'
-    //       },
-    //     },
-    //   },
-    // });
-     
-    // const useStyles = makeStyles((theme) => ({
-    //     root: {
-    //       display: 'flex',
-    //       flexWrap: 'wrap',
-    //       justifyContent: 'space-around',
-    //       overflow: 'hidden',
-    //       backgroundColor: theme.palette.background.paper
 
-    //     },
-    //     image:{
-    //       height:'100%',
-    //       width:'100%',
-    //       position:''
-    //     },
-    //     gridList: {
-    //       flexWrap: 'nowrap',
-    //       // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
-    //       transform: 'translateZ(0)',
-           
-          
-    //      },
-    //     title: {
-    //       color: 'white',
 
-    //     },
-    //     titleBar: {
-    //       background:
-    //         'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
-    //       },
-    //   }));
-      
-   
     const stylesMovieList = {
       root: {
               display: 'flex',
               flexWrap: 'wrap',
               justifyContent: 'space-around',
               overflow: 'hidden',    
+            },
+            title:{
+                color:styles.secondaryColor
             },
       gridList:{
         flexWrap:'nowrap'
@@ -76,46 +34,33 @@ const MovieList = ({movieList}) => {
       image:{
         width:'100%',
         height:'100%',
-        cursor: 'pointer'
-      }      
+        cursor: 'pointer',
+        objectFit: 'contain'
+      },
     }
-
     
- const handleMovieTv = (e,id,title) => {
-  e.preventDefault()
-    switch(movieList.typeMovie){
-      case'movie':
-        detailMovie(id,title,movieList.typeMovie,history);  
-        break; 
-      case'tv':
-       detailTv(id,title,movieList.typeMovie,history)
-       break;
-       default:
-         console.error()
-    }
-  }
-   
+
   // const classes = useStyles();
 
+
   return (
+    
+    <>
+    {!movieList.loaded?
+    <h2>Chargement</h2>:
         <div style={stylesMovieList.root}>
-        <h3>{movieList.title}</h3>
+        <h3 style={stylesMovieList.title}>{movieList.title}</h3>
       <GridList style={stylesMovieList.gridList} >
         {movieList.movies != null && movieList.movies.map((movie,key) => (
           <GridListTile key={key} style={stylesMovieList.gridListTile} >
-            <img onClick={(e) => handleMovieTv(e,movie.id,movie.title) } src={movie.img} alt={movie.title} style={stylesMovieList.image}/>
-            <GridListTileBar
-              title={movie.title}
-              actionIcon={
-                <IconButton aria-label={`star ${movie.title}`}>
-                  <StarBorderIcon/>
-                </IconButton>
-              }
-            />
+            <img onClick={(e) => handleMovieTv(e,movie.id,movie.title,movieList.typeMovie,history)} src={movie.img} alt={movie.title} style={stylesMovieList.image}/>
+          <StarFavoris movie={movie}/>
           </GridListTile>
         ))}
       </GridList>
       </div>
+             } 
+     </>        
   );
 }
 

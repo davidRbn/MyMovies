@@ -16,6 +16,19 @@
     })
   }
 
-
+   
+ export const handleMovieTv = (e,id,title,typeMovie,history) => {
+    e.preventDefault()
+      switch(typeMovie){
+        case'movie':
+          detailMovie(id,title,typeMovie,history);  
+          break; 
+        case'tv':
+         detailTv(id,title,typeMovie,history)
+         break;
+         default:
+           console.error()
+      }
+    }
   
 

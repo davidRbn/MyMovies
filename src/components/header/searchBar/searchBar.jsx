@@ -4,15 +4,36 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import React, { useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom';
 import SearchSelect from './SearchSelect';
+import ResultSearchBar from './resultSearchBar/ResultSearchBar';
+import apiMovie, { apiMovieMap } from '../../conf/api.movies'
 
-const SearchBar = () => {
 
+const SearchBar = ({searchBar}) => {
+
+const [movieSearchList,setMovieSearchList] = useState({
+        movies : null,
+        loaded:false
+      })
+
+  const updtateSearchMovies = (movies) => {
+    setMovieSearchList({
+        movies,
+        loaded:true
+    })
+
+}
    const [searchValue,setSearchValue] = useState('')
    const [typeMovie,setTypeMovie] = useState('movie')
+   const [viewResult,setViewResult] = useState(true)
+
    let history = useHistory()
+
+   document.body.addEventListener('click',() => {
+    setViewResult(false)
+ })
 
    const handleChange = event => {
         setTypeMovie(event.target.value);
@@ -23,14 +44,27 @@ const SearchBar = () => {
           padding: '2px 4px',
           display: 'flex',
           alignItems: 'center',
-          width:'300px'
+          width:'300px',
+          backgroundColor:'black',
+          border:'1px solid white',
+          marginLeft:'10px',
+          position:'absolute',
+          zIndex:'100'
+        },
+        rootNone:{
+          display:'none',
+          height:'100px'
         },
         input: {
           marginLeft: theme.spacing(1),
           flex: 1,
+          color:'white'
         },
         iconButton: {
           padding: 10,
+        },
+        searchIcon: {
+            color:'white'
         },
         divider: {
           height: 28,
@@ -45,14 +79,35 @@ const SearchBar = () => {
             history.push({
             pathname: '/searchMovies',
             search:`?${searchValue}`,
-            state:{searchValue,typeMovie}
+            state:{movieSearchList,typeMovie}
         })
        return setSearchValue('')
       }
 
+      const getMovies = useCallback(() =>  {
+        apiMovie.get(`/search/${typeMovie}?query=${searchValue}`)
+        .then(res => {
+         return res.data.results})
+        .then(m =>{
+              const movie = m.map(apiMovieMap)
+              updtateSearchMovies(movie)
+        })},[searchValue,typeMovie])
+
+
+        useEffect(() => {
+          if (searchValue !== ''){
+          getMovies()
+          setViewResult(true)
+          }else{
+            return null
+          }
+        },[searchValue,getMovies])
+
+
+
     return(
         <>
-             <Paper component="form" onSubmit={submit}  className={classes.root}>
+             <Paper component="form" onSubmit={submit}  className={searchBar?classes.root:classes.rootNone}>
       <InputBase
         className={classes.input}
         placeholder="Recherche"
@@ -61,12 +116,14 @@ const SearchBar = () => {
         onChange={e => {
           setSearchValue(e.target.value)}}
       />
-      <IconButton type="submit" className={classes.iconButton} aria-label="search">
-        <SearchIcon />
+      <IconButton disabled={searchValue?false:true} type="submit" className={classes.iconButton} aria-label="search">
+        <SearchIcon className={classes.searchIcon} />
       </IconButton>
       <Divider className={classes.divider} orientation="vertical" />
       <SearchSelect handleChange={handleChange} typeMovie={typeMovie}/>
     </Paper>
+    {searchValue ? <ResultSearchBar  movieSearchList={movieSearchList} viewResult={viewResult} typeMovie={typeMovie} getMovies={getMovies}/>:null }
+   
         </>
     )
 }

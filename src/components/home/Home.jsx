@@ -4,7 +4,6 @@ import apiMovie,{apiMovieMap, apiTvMap} from '../conf/api.movies'
 
 const Home = () => {
 
-
   const [movieListUpcomming,setMovieListUpcomming] = useState({
       movies:null,
       typeMovie:'',
@@ -61,11 +60,13 @@ const getTvLatest = useCallback(()=> {
        getTvLatest()
  },[getMoviesUpcomming,getTvLatest])
 
+ console.log(process.env)
+
     return(
-        <>
+        <div style={{marginTop:'50px'}}>
         <MovieList movieList={movieListUpcomming}/>
         <MovieList movieList={tvListLatest}/>
-        </>
+        </div>
     )
 }
 
