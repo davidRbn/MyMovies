@@ -60,8 +60,6 @@ const getTvLatest = useCallback(()=> {
        getTvLatest()
  },[getMoviesUpcomming,getTvLatest])
 
- console.log(process.env)
-
     return(
         <div style={{marginTop:'50px'}}>
         <MovieList movieList={movieListUpcomming}/>
