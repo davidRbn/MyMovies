@@ -1,6 +1,7 @@
 import { List, ListItem, ListItemText, makeStyles, Typography } from '@material-ui/core'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import apiFavoris from '../conf/api.Favoris'
+import { AuthContext } from '../context/contextAuth'
 import styles from '../styles/styles'
 
 const Favoris = () => {
@@ -9,14 +10,16 @@ const Favoris = () => {
      const idUser = localStorage.getItem('user')
      const [isLoaded, setLoaded] = useState(false)
 
+
             const getFavoris = useCallback( () =>{ apiFavoris.get(`/favoris/${idUser}`)
             .then(res => {
+              console.log('favoris')
                 setFavoris1(res.data)
                 setLoaded(true)
                 })},[idUser])
 
                 useEffect(() => {
-                    getFavoris()
+                  getFavoris()
                 },[getFavoris])
 
 

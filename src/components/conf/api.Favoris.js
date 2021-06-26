@@ -1,7 +1,7 @@
 import Axios from 'axios'
 
 const apiFavoris = Axios.create({
-    baseURL : 'http://localhost:8080/api'
+    baseURL : 'https://guarded-tor-06540.herokuapp.com/api'
 })
 
 export default apiFavoris

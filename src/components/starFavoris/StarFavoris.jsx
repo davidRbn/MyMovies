@@ -38,7 +38,7 @@ const StarFavoris = (movie) => {
     }))
             
        
-    const getFavoris = useCallback( async () =>{await apiFavoris.get(`/favoris/${state.user}`)
+    const getFavoris = useCallback( () =>{ apiFavoris.get(`/favoris/${state.user}`)
             .then(res => {
                 if (favorisChange){
                 setFavoris(res.data)
@@ -63,9 +63,9 @@ const StarFavoris = (movie) => {
 
     useEffect(() => {
             isFavorite()
-            getFavoris()
+          state.isAuthenticated && getFavoris()
         return () => setFavorisChange(false)
-   },[favoris.length, favorisChange, getFavoris, isFavorite])
+   },[favoris.length, favorisChange, getFavoris, isFavorite,state.isAuthenticated])
 
 //     useEffect(() => {
 //         isFavorite()

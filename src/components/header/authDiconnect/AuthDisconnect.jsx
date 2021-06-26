@@ -17,7 +17,7 @@ const AuthDisconnect = () => {
         e.preventDefault()
         history.push('/')
         dispatch({type: "LOGOUT"})
-        console.log('deconnection')
+        console.log('Vous êtes deconnecté')
       }
 
     return(

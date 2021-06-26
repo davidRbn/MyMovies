@@ -38,9 +38,9 @@ const Signin = ({data,handleInputChange,setActionAuth}) => {
     }
 }
 
-const signinUser = (e) => {
+const signinUser = async (e) => {
     e.preventDefault()
-    apiUser.post('/users/login',{
+   await apiUser.post('/users/login',{
         email: data.email,
         password: data.password    
     })
@@ -52,8 +52,10 @@ const signinUser = (e) => {
             user: res.data.userId          
         } , 
     })})
+    .catch(err => console.log(err))
     history.push('/')
 }
+
 
     return(
         <>

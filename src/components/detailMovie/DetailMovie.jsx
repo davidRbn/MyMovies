@@ -35,7 +35,6 @@ const DetailMovie = (props) => {
         getMovieDetail()
   },[getMovieDetail])
 
-  console.log(movieDetail) 
 
     return(
         <div className='detailMovie'>

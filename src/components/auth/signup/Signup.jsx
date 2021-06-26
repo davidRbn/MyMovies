@@ -45,8 +45,6 @@ const registerUser = (e) => {
     .then(res => console.log('register'))
     .catch(err=> console.log(console.err))
 }
-console.log(data)
- 
 
     return (
         <div style={{height:'80%',display:'flex',justifyContent: 'center',alignItems:'center'}}>
