@@ -18,7 +18,7 @@ const StarFavoris = (movie) => {
      // eslint-disable-next-line no-unused-vars
      const [state,dispatch] = useContext(AuthContext)
      
-     const tokenUser = localStorage.getItem('token')
+    //  const tokenUser = localStorage.getItem('token')
     //  const _isMounted = useRef(true);
     const [favorisModal,setFavorisModal] = useState(false)
 
