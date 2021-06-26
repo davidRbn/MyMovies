@@ -65,7 +65,8 @@ const StarFavoris = (movie) => {
             isFavorite()
           state.isAuthenticated && getFavoris()
         return () => setFavorisChange(false)
-   },[favoris.length, favorisChange, getFavoris, isFavorite,state.isAuthenticated])
+   // eslint-disable-next-line react-hooks/exhaustive-deps
+   },[favoris.length, favorisChange, getFavoris, isFavorite])
 
 //     useEffect(() => {
 //         isFavorite()
