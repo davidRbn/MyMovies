@@ -61,17 +61,18 @@ const StarFavoris = (movie) => {
 
     },[favoris,movie.movie.id])
 
-    useEffect( () =>  {
+    useEffect( () => {
          if (state.isAuthenticated) {
-             getFavoris()
              isFavorite()
             }
         return () => setFavorisChange(false)
    // eslint-disable-next-line react-hooks/exhaustive-deps
    },[favoris.length, favorisChange, getFavoris, isFavorite])
  
-
-
+    useEffect(() => {
+        getFavoris()
+    })
+  
    const handleModalFavoris = () => {
         return setFavorisModal(!favorisModal)
    }
@@ -90,6 +91,7 @@ const StarFavoris = (movie) => {
                 userId: state.user,
           },{headers : {'Authorization' : tokenUser}}).then(res => console.log(res))
           setFavorisChange(true)
+          getFavoris()
          }else{
             handleModalFavoris()
          }
@@ -101,7 +103,8 @@ const StarFavoris = (movie) => {
         e.preventDefault()
        await apiFavoris.delete(`/favoris/${movie.movie.id}/${state.user}`)
             .then(res => setFavorisValidation(res) )
-      setFavorisChange(true)      
+      setFavorisChange(true) 
+      getFavoris()     
     }
 
 
