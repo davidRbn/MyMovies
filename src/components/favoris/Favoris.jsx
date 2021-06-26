@@ -1,7 +1,6 @@
 import { List, ListItem, ListItemText, makeStyles, Typography } from '@material-ui/core'
-import React, { useCallback, useContext, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import apiFavoris from '../conf/api.Favoris'
-import { AuthContext } from '../context/contextAuth'
 import styles from '../styles/styles'
 
 const Favoris = () => {
