@@ -40,8 +40,7 @@ const styleMovieSearchList = {
 
     return(
         <List style={viewResult ? styleMovieSearchList.listItem:styleMovieSearchList.listItemClose}>
-        {!movieSearchList.loaded?<h1>chargement</h1>:
-        movieSearchList.movies.map((movie,key) => (
+        {movieSearchList.movies?.length === 0 ? <p>Aucun resultat</p> :movieSearchList.movies?.map((movie,key) => (
             <div key={key} onClick={(e) => handleMovieTv(e,movie.id,movie.title,typeMovie,history)} style={viewResult ? styleMovieSearchList.containerResult:styleMovieSearchList.containerResultClose}>
                 <ListItemAvatar ><img style={styleMovieSearchList.img} alt={movie.title} src={movie.img}/></ListItemAvatar>
                <ListItemText style={styleMovieSearchList.title}>{movie.title}</ListItemText>

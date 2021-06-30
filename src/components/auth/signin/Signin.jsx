@@ -1,16 +1,19 @@
 import { Button, Input, InputLabel} from '@material-ui/core'
 import SendIcon from '@material-ui/icons/Send';
 import React, { useContext } from 'react'
+import { useState } from 'react';
 import { useHistory } from 'react-router';
 import apiUser from '../../conf/api.users';
 import { AuthContext } from '../../context/contextAuth';
-import styles from '../../styles/styles'
+import styles from '../../styles/styles';
+import Loader from '../../loader/Loader'
 
 const Signin = ({data,handleInputChange,setActionAuth}) => {
   
     const history = useHistory()
     // eslint-disable-next-line no-unused-vars
     const [state,dispatch] = useContext(AuthContext)
+    const [loaderSignin,setLoaderSignin] = useState(false)
 
   const styleLogin = {
     inputLabel:{
@@ -40,17 +43,19 @@ const Signin = ({data,handleInputChange,setActionAuth}) => {
 
 const signinUser = async (e) => {
     e.preventDefault()
+    setLoaderSignin(true)
    await apiUser.post('/users/login',{
         email: data.email,
         password: data.password    
     })
     .then(res => {
+        setLoaderSignin(false)
         dispatch({
         type: 'LOGIN',
         payload :{
             token:res.data.token,
             user: res.data.userId          
-        } , 
+        } 
     })})
     .catch(err => console.log(err))
     history.push('/')
@@ -59,8 +64,8 @@ const signinUser = async (e) => {
 
     return(
         <>
-                  <div style={{height:'80%',display:'flex',justifyContent: 'center',alignItems:'center'}}>
-        <div style={{width:'200px',height:'40%',textAlign:'center'}} >
+                 <div style={{height:'80%',display:'flex',justifyContent: 'center',alignItems:'center'}}>
+        {loaderSignin? <Loader/> : <div style={{width:'200px',height:'40%',textAlign:'center'}} >
             <div> 
              <h2 style={{color:styles.secondaryColor}} >Se connecter</h2>
              </div>
@@ -78,7 +83,7 @@ const signinUser = async (e) => {
             </Button>
         </form>
         <p style={styleLogin.buttonSignin} onClick={() => setActionAuth('SIGNUP')}>S'inscrire</p>
-        </div>
+        </div>}
         </div>
         </>
     )

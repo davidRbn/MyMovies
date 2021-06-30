@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import apiMovie, { apiMovieMap } from '../conf/api.movies'
+import Loader from '../loader/Loader'
 import './detailMovie.scss'
 
 
@@ -39,7 +40,7 @@ const DetailMovie = (props) => {
     return(
         <div className='detailMovie'>
             {!movieDetail.loaded ? 
-            <h1>CHARGEMENT</h1>
+            <Loader/>
         : movieDetail.movies.map((m,key) =>(
             <div key={key}>
                 <img alt={m.title} src={m.img}/>

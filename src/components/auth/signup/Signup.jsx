@@ -1,10 +1,13 @@
 import { Button, Input, InputLabel } from '@material-ui/core'
 import SendIcon from '@material-ui/icons/Send';
-import React from 'react'
+import React, { useState } from 'react'
 import apiUser from '../../conf/api.users';
+import Loader from '../../loader/Loader';
 import styles from '../../styles/styles'
 
-const Signup = ({data,setData,setActionAuth,handleInputChange}) => {
+const Signup = ({data,setActionAuth,handleInputChange}) => {
+
+    const [loaderSignup,setLoaderSignup] = useState(false)
 
 
   const styleLogin = {
@@ -35,20 +38,25 @@ const Signup = ({data,setData,setActionAuth,handleInputChange}) => {
   }
 
   
-const registerUser = (e) => {
+const registerUser = async (e) => {
     e.preventDefault()
-    apiUser.post('/users/register',{
+    setLoaderSignup(true)
+   await apiUser.post('/users/register',{
         email:data.email,
         username:data.name,
         password:data.password
     })
-    .then(res => console.log('register'))
+    .then(res => {
+        setLoaderSignup(false)
+        console.log('register')})
     .catch(err=> console.log(console.err))
+    setActionAuth('SIGNIN')
+
 }
 
     return (
         <div style={{height:'80%',display:'flex',justifyContent: 'center',alignItems:'center'}}>
-        <div style={{width:'200px',height:'40%',textAlign:'center',justifyContent:'space-between'}} >
+       { loaderSignup? <Loader/> : <div style={{width:'200px',height:'40%',textAlign:'center',justifyContent:'space-between'}} >
             <div> 
              <h2 style={{color:styles.secondaryColor}}>S'inscrire</h2>
              </div>
@@ -67,7 +75,7 @@ const registerUser = (e) => {
             </Button>
         </form>
         <p style={styleLogin.buttonSignin} onClick={() => setActionAuth('SIGNIN')}>Se connecter</p>
-        </div>
+        </div>}
         </div>
     )
 }

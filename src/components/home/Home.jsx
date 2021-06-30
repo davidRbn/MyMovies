@@ -1,8 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import MovieList from './movieList/MovieList'
 import apiMovie,{apiMovieMap, apiTvMap} from '../conf/api.movies'
+import Loader from '../loader/Loader'
 
 const Home = () => {
+
 
   const [movieListUpcomming,setMovieListUpcomming] = useState({
       movies:null,
@@ -61,11 +63,16 @@ const getTvLatest = useCallback(()=> {
  },[getMoviesUpcomming,getTvLatest])
 
     return(
+        <>
+        { !movieListUpcomming.loaded && !tvListLatest.loaded ? <Loader/> : 
+            
         <div style={{marginTop:'50px'}}>
         <MovieList movieList={movieListUpcomming}/>
         <MovieList movieList={tvListLatest}/>
+        
         </div>
-    )
+        
+        }</>)
 }
 
 export default Home

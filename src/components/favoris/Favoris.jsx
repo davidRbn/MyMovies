@@ -1,6 +1,7 @@
 import { List, ListItem, ListItemText, makeStyles, Typography } from '@material-ui/core'
 import React, { useCallback, useEffect, useState } from 'react'
 import apiFavoris from '../conf/api.Favoris'
+import Loader from '../loader/Loader'
 import styles from '../styles/styles'
 
 const Favoris = () => {
@@ -12,7 +13,6 @@ const Favoris = () => {
 
             const getFavoris = useCallback( () =>{ apiFavoris.get(`/favoris/${idUser}`)
             .then(res => {
-              console.log('favoris')
                 setFavoris1(res.data)
                 setLoaded(true)
                 })},[idUser])
@@ -42,6 +42,12 @@ const Favoris = () => {
                     typo :{
                       color: styles.secondaryColor,
                       marginTop: '20px'
+                    },
+                    textError:{
+                      color: styles.secondaryColor,
+                      textAlign:'center',
+                      marginTop:'50vh',
+                      transform:'translateY(-50%)'
                     }
                   }
 
@@ -57,11 +63,12 @@ const Favoris = () => {
                   });
                   const classes = useStyles();
 
+
     return (
          <>
                
            
-           {  !isLoaded ? <h1>Chargement</h1> : favoris1.map((movie,index) =>  
+           {  !isLoaded ? <Loader/> : favoris1.error ? <p style={stylesSearchMovie.textError}>{favoris1.error}</p> : favoris1.map((movie,index) =>  
                
                     <List key={index}>
                  <ListItem >

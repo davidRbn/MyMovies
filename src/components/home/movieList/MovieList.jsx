@@ -45,9 +45,6 @@ const MovieList = ({movieList}) => {
 
   return (
     
-    <>
-    {!movieList.loaded?
-    <h2>Chargement</h2>:
         <div style={stylesMovieList.root}>
         <h3 style={stylesMovieList.title}>{movieList.title}</h3>
       <GridList style={stylesMovieList.gridList} >
@@ -59,8 +56,7 @@ const MovieList = ({movieList}) => {
         ))}
       </GridList>
       </div>
-             } 
-     </>        
+       
   );
 }
 

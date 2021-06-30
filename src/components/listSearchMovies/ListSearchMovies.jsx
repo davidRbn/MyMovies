@@ -5,6 +5,7 @@ import { useHistory } from 'react-router';
 import { handleMovieTv } from '../conf/detail.movie';
 import styles from '../styles/styles'
 import { makeStyles } from '@material-ui/core/styles';
+import { TextField } from '@material-ui/core';
 
 
 const ListSearchMovies = (value) => {
@@ -75,18 +76,21 @@ const ListSearchMovies = (value) => {
       tileBarRoot:{
         width:'100%'
       }
-
+       
       })) 
         
       
-
+  
 
     const classes = stylesSearchMovie()
     
     return(
         <>
+        {movieSearchList.movies?.length === 0 ?<div style={{display:'grid',
+            placeItems:'center',
+            height:'calc(100% - 64px)'}}> <h3 style={{color:'white',textAlign:'center'}}>Aucun resultat</h3></div>:
       <GridList className={classes.gridList}>
-        {movieSearchList.movies != null && movieSearchList.movies.filter(movie => movie.poster_path != null).map((movie,key) => (
+          {movieSearchList.movies.filter(movie => movie.poster_path != null).map((movie,key) => (
           <GridListTile key={key} classes={{tile : classes.gridListTile,root : classes.rootGrid}}>
             <img onClick={(e) => handleMovieTv(e,movie.id,movie.title,typeMovie,history)} src={movie.img} alt={movie.title} className={classes.image}/>
             <GridListTileBar
@@ -104,7 +108,7 @@ const ListSearchMovies = (value) => {
             />
           </GridListTile>
         ))}
-      </GridList>
+      </GridList>}
       </>
     )
 }
