@@ -5,7 +5,6 @@ import { useHistory } from 'react-router';
 import { handleMovieTv } from '../conf/detail.movie';
 import styles from '../styles/styles'
 import { makeStyles } from '@material-ui/core/styles';
-import { TextField } from '@material-ui/core';
 
 
 const ListSearchMovies = (value) => {
