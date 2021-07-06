@@ -54,7 +54,7 @@ const Favoris = () => {
                   const useStyles = makeStyles({
                     root: {
                       
-                      color: 'red',
+                      color: `${styles.primaryColor}`,
                       
                     },
                     label: {
