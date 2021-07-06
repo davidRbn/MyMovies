@@ -7,6 +7,7 @@ import apiUser from '../../conf/api.users';
 import { AuthContext } from '../../context/contextAuth';
 import styles from '../../styles/styles';
 import Loader from '../../loader/Loader'
+import ModalSignin from './modalSignin/ModalSignin';
 
 const Signin = ({data,handleInputChange,setActionAuth}) => {
   
@@ -14,6 +15,8 @@ const Signin = ({data,handleInputChange,setActionAuth}) => {
     // eslint-disable-next-line no-unused-vars
     const [state,dispatch] = useContext(AuthContext)
     const [loaderSignin,setLoaderSignin] = useState(false)
+    const [signinModal,setsigninModal] = useState(true)
+
 
   const styleLogin = {
     inputLabel:{
@@ -85,6 +88,7 @@ const signinUser = async (e) => {
         <p style={styleLogin.buttonSignin} onClick={() => setActionAuth('SIGNUP')}>S'inscrire</p>
         </div>}
         </div>
+        {<ModalSignin signinModal={signinModal} setsigninModal={setsigninModal}/>}
         </>
     )
 }

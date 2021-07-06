@@ -3,7 +3,7 @@ import React from 'react'
 import { useHistory } from 'react-router';
 
 
-const ModalFavoris = ({favorisModal,handleModalFavoris}) => {
+const ModalSignin = ({signinModal,setsigninModal}) => {
 
     function rand() {
         return Math.round(Math.random() * 20) - 10;
@@ -28,42 +28,42 @@ const ModalFavoris = ({favorisModal,handleModalFavoris}) => {
           border: '2px solid #000',
           boxShadow: theme.shadows[5],
           padding: theme.spacing(2, 4, 3),
+          textAlign:'center'
         },
       }));
 
       const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
      const [modalStyle] = React.useState(getModalStyle);
-     let history = useHistory()
 
 
     const body = (
         <div style={modalStyle} className={classes.paper}>
+            <h2 id="simple-modal-title">Pour tester l'application </h2>
           <p id="simple-modal-description">
-          Connectez-vous pour ajouter ce film à votre liste de favoris.
-          </p>
-          <button type="button" onClick={() => history.push('/login')} >
-          Se connecter
-         </button>
-         <button type="button" onClick={handleModalFavoris}>
-                Fermer         
-            </button>
+              Email: mymovies@test.com
+         </p>
+         <p id="simple-modal-description"> Mot de passe : azerty4</p>
         </div>
       );
 
+      const handleClose = () => {
+        setsigninModal(false);
+      };
 
     return (
         <>
-        <Modal      open={favorisModal}
-                    // onClose={handleClose}
+        <Modal      open={signinModal}
+                    onClose={handleClose}
                     aria-labelledby="simple-modal-title"
                     aria-describedby="simple-modal-description"
             >
                 {body}
           </Modal>
+
         </>
     )
 }
 
 
-export default ModalFavoris
+export default ModalSignin
