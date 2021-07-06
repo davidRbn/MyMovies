@@ -1,17 +1,16 @@
 import { makeStyles, Modal } from '@material-ui/core';
 import React from 'react'
-import { useHistory } from 'react-router';
 
 
 const ModalSignin = ({signinModal,setsigninModal}) => {
 
-    function rand() {
-        return Math.round(Math.random() * 20) - 10;
-      }
+    // function rand() {
+    //     return Math.round(Math.random() * 20) - 10;
+    //   }
       
       function getModalStyle() {
-        const top = 50 + rand();
-        const left = 50 + rand();
+        const top = 50 ;
+        const left = 50 ;
       
         return {
           top: `${top}%`,
