@@ -41,6 +41,9 @@ const Header = () => {
         root: {
           flexGrow: 1,
         },
+        appBar:{
+          backgroundColor:'#141414'
+        },
         menuButton: {
           marginRight: theme.spacing(2),
         },
@@ -56,7 +59,7 @@ const Header = () => {
       return (
           <>
         <div className={classes.root}>
-          <AppBar position="static" color='transparent' >
+          <AppBar position="fixed" className={classes.appBar} >
             <Toolbar>
               {/* <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
                 <MenuIcon />

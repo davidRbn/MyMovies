@@ -130,7 +130,7 @@ const StarFavoris = (movie) => {
                        :<StarBorderIcon className={classes.starBorderIcon} />                    
                     
                      }
-                    </IconButton>           
+                    </IconButton>       
                     
               }
             />}
