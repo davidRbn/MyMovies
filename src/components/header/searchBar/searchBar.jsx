@@ -40,7 +40,12 @@ const [movieSearchList,setMovieSearchList] = useState({
       };
 
     const useStyles = makeStyles((theme) => ({
-        root: {
+      blocSearchBar:{
+          display:'flex',
+          flexDirection:'column'
+
+      },
+      root: {
           padding: '2px 4px',
           display: 'flex',
           alignItems: 'center',
@@ -48,8 +53,9 @@ const [movieSearchList,setMovieSearchList] = useState({
           backgroundColor:'black',
           border:'1px solid white',
           marginLeft:'10px',
-          position:'absolute',
-          zIndex:'100'
+          position:'relative'
+          // position:'absolute',
+          // zIndex:'100'
         },
         rootNone:{
           display:'none',
@@ -106,7 +112,7 @@ const [movieSearchList,setMovieSearchList] = useState({
 
 
     return(
-        <>
+        <div className='classes.blocSearchBar'>
              <Paper component="form" onSubmit={submit}  className={searchBar?classes.root:classes.rootNone}>
       <InputBase
         className={classes.input}
@@ -123,8 +129,7 @@ const [movieSearchList,setMovieSearchList] = useState({
       <SearchSelect handleChange={handleChange} typeMovie={typeMovie}/>
     </Paper>
     {searchValue ? <ResultSearchBar  movieSearchList={movieSearchList} viewResult={viewResult} typeMovie={typeMovie} getMovies={getMovies}/>:null }
-   
-        </>
+        </div>
     )
 }
 

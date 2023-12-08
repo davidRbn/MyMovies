@@ -67,6 +67,7 @@ const Header = () => {
               <Typography variant="h6" className={classes.title}>
               <Link style={{color:styles.primaryColor,textDecoration:'none'}} to='/'>MYmovies</Link>  
               </Typography>
+        <SearchBar searchBar={searchBar}/>
               {state.isAuthenticated && <Button onClick={e => viewFavoris(e)}style={{color: styles.secondaryColor}}>Mes Favoris</Button>}
               <Button onClick={e => searchBarDisplay(e)} color="inherit" style={{color:styles.secondaryColor}}><IconSearch/></Button>
               <Button  color="inherit" style={{color:styles.secondaryColor}}><Auth closeSearchBar={closeSearchBar}/></Button>
@@ -75,7 +76,7 @@ const Header = () => {
           </AppBar>
         </div>
         {/* {searchBar&&<SearchBar/>} */}
-        <SearchBar searchBar={searchBar}/>
+        {/* <SearchBar searchBar={searchBar}/> */}
         </>
       );
 }

@@ -1,4 +1,4 @@
-import * as Axios from 'axios'
+import  Axios from 'axios'
 
 const apiMovie = Axios.create({
     baseURL: 'https://api.themoviedb.org/3'

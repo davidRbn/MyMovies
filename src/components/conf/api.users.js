@@ -1,9 +1,9 @@
-import axios from "axios";
+import Axios from "axios";
 
 
-const apiUser = axios.create({
+const apiUser = Axios.create({
 
-baseURL: 'https://guarded-tor-06540.herokuapp.com/api'
+baseURL: 'https://mymoviesback2-production.up.railway.app/api'
 })
 
 export default apiUser

@@ -5,6 +5,18 @@ import Loader from '../loader/Loader'
 
 const Home = () => {
 
+  let hello =  [
+        { name:'Lisa'    , mark:'16' },
+        { name:'Pascal'  , mark:'13' },
+        { name:'Romain'  , mark:'12' },
+        { name:'Lucas'   , mark:'4'  },
+        { name:'Aurélie' , mark:'14' }
+    ]
+    .map(function(student) { student.mark = Number(student.mark); return student })
+    .filter(function(student) { return student.mark >= 10 })
+    .reduce(function(acc, student) { return student.mark + acc }, 0);
+
+    console.log(hello);
 
   const [movieListUpcomming,setMovieListUpcomming] = useState({
       movies:null,

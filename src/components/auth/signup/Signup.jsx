@@ -48,8 +48,19 @@ const registerUser = async (e) => {
     })
     .then(res => {
         setLoaderSignup(false)
-        console.log('register')})
-    .catch(err=> console.log(console.err))
+        console.log('register')
+        console.log(res)
+    })
+    .catch(err=> {
+        console.log(err)
+    
+        console.error(err.message)
+        console.error(err.request)
+        console.error(err.response.status)
+
+    
+    
+    })
     setActionAuth('SIGNIN')
 
 }

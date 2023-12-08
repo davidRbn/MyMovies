@@ -22,7 +22,6 @@ const StarFavoris = (movie) => {
     //  const _isMounted = useRef(true);
     const [favorisModal,setFavorisModal] = useState(false)
 
-
      
     const stylesFavoris = makeStyles(() => ({
         title:{
@@ -38,14 +37,19 @@ const StarFavoris = (movie) => {
     }))
             
        
-    const getFavoris = useCallback( async () =>{await apiFavoris.get(`/favoris/${state.user}`)
+    const getFavoris = 
+    
+    useCallback( async () =>{
+        
+        await apiFavoris.get(`/favoris/${state.user}`)
             .then(res => {
                 if (favorisChange){
                 setFavoris(res.data)
             }
-                })
+                }).catch(err => console.log(err))
                 
-       },[favorisChange, state.user])
+       // eslint-disable-next-line react-hooks/exhaustive-deps
+       },[favorisChange])
     
        
     const isFavorite = useCallback( () => {
@@ -60,6 +64,8 @@ const StarFavoris = (movie) => {
        return isFavorite
 
     },[favoris,movie.movie.id])
+
+
 
     useEffect( () => {
          if (state.isAuthenticated) {
@@ -89,9 +95,13 @@ const StarFavoris = (movie) => {
                 details : movie.movie.details,
                 description : movie.movie.description,
                 typeMovie: movie.typeMovie,
-                userId: state.user,
-          }).then(res => console.log(res))
-          setFavorisChange(true)
+                userUid: state.user,
+          }).then(res => {
+            
+                      console.log(res)
+                     setFavorisChange(true)}
+          )
+          .catch(err => console.log(err))
          }else{
             handleModalFavoris()
          }

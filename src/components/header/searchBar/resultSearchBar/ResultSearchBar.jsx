@@ -19,10 +19,11 @@ const styleMovieSearchList = {
         width:'70px'
     },
     title:{
-        padding:'10px'
+        padding:'10px',
+        color:'white'
     },
     listItem:{
-        backgroundColor:'white',
+        backgroundColor:'black',
         height:"250px",
         width:'290px',
         overflowY:'scroll',
@@ -30,8 +31,8 @@ const styleMovieSearchList = {
         position:'absolute',
         zIndex:'300',
         cursor:'pointer',
-        marginTop:'50px',
-        marginLeft:'10px'
+        // marginTop:'50px',
+        marginLeft:'10px',
     },
     listItemClose:{
         display:'none'

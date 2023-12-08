@@ -52,6 +52,7 @@ const signinUser = async (e) => {
         password: data.password    
     })
     .then(res => {
+        console.log(res.data);
         setLoaderSignin(false)
         dispatch({
         type: 'LOGIN',
