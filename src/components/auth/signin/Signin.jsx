@@ -52,7 +52,6 @@ const Signin = ({ data, handleInputChange, setActionAuth }) => {
         password: data.password,
       })
       .then((res) => {
-        console.log(res.data);
         setLoaderSignin(false);
         dispatch({
           type: "LOGIN",
