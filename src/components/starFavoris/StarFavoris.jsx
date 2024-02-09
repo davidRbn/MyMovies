@@ -70,7 +70,6 @@ const StarFavoris = ({ movie, favoris, setFavoris, setFavorisChange }) => {
           userUid: state.user,
         })
         .then((res) => {
-          console.log(res);
           setFavoris((fav) => [...fav, res.data]);
           setFavorisChange(true);
         })
@@ -85,8 +84,13 @@ const StarFavoris = ({ movie, favoris, setFavoris, setFavorisChange }) => {
   const deleteFavoris = async (e) => {
     e.preventDefault();
     await apiFavoris
-      .delete(`/favoris/${movie.movie.id}/${state.user}`)
-      .then((res) => setFavorisValidation(res));
+      .delete(`/favoris/${movie.id}/${state.user}`)
+      .then((res) => {
+        setFavorisValidation(res);
+        console.log(movie.id);
+        const favFilter = favoris.map((fav) => fav.idMovie !== `${movie.id}`);
+        setFavoris(favFilter);
+      });
     setFavorisChange(true);
   };
 
