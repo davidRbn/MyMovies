@@ -70,7 +70,13 @@ const StarFavoris = ({ movie, favoris, setFavoris, setFavorisChange }) => {
           userUid: state.user,
         })
         .then((res) => {
-          setFavoris((fav) => [...fav, res.data]);
+          setFavoris((fav) => {
+            if (fav.length > 0) {
+              return [...fav, res.data];
+            } else {
+              return [res.data];
+            }
+          });
           setFavorisChange(true);
         })
         .catch((err) => console.log(err));
@@ -88,7 +94,9 @@ const StarFavoris = ({ movie, favoris, setFavoris, setFavorisChange }) => {
       .then((res) => {
         setFavorisValidation(res);
         console.log(movie.id);
-        const favFilter = favoris.map((fav) => fav.idMovie !== `${movie.id}`);
+        const favFilter = favoris.filter(
+          (fav) => fav.idMovie !== `${movie.id}`
+        );
         setFavoris(favFilter);
       });
     setFavorisChange(true);
