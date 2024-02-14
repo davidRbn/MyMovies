@@ -10,7 +10,12 @@ import SearchSelect from "./SearchSelect";
 import ResultSearchBar from "./resultSearchBar/ResultSearchBar";
 import apiMovie, { apiMovieMap } from "../../conf/api.movies";
 
-const SearchBar = ({ searchBar }) => {
+const SearchBar = ({
+  searchBar,
+  searchValue,
+  setSearchValue,
+  searchBarDisplay,
+}) => {
   const [movieSearchList, setMovieSearchList] = useState({
     movies: null,
     loaded: false,
@@ -22,7 +27,6 @@ const SearchBar = ({ searchBar }) => {
       loaded: true,
     });
   };
-  const [searchValue, setSearchValue] = useState("");
   const [typeMovie, setTypeMovie] = useState("movie");
   const [viewResult, setViewResult] = useState(true);
 
@@ -38,18 +42,25 @@ const SearchBar = ({ searchBar }) => {
 
   const useStyles = makeStyles((theme) => ({
     blocSearchBar: {
-      display: "flex",
-      flexDirection: "column",
+      // display: "flex",
+      // flexDirection: "column",
+      width: "300px",
+      [theme.breakpoints.down("sm")]: {
+        position: "absolute",
+        top: "56px",
+        left: "5px",
+      },
     },
     root: {
       padding: "2px 4px",
       display: "flex",
+      width: "100%",
       alignItems: "center",
-      width: "300px",
       backgroundColor: "black",
       border: "1px solid white",
-      marginLeft: "10px",
+      // marginLeft: "10px",
       position: "relative",
+
       // position:'absolute',
       // zIndex:'100'
     },
@@ -83,7 +94,7 @@ const SearchBar = ({ searchBar }) => {
       search: `?${searchValue}`,
       state: { movieSearchList, typeMovie },
     });
-    return setSearchValue("");
+    searchBarDisplay(e);
   };
 
   const getMovies = useCallback(() => {
@@ -108,7 +119,7 @@ const SearchBar = ({ searchBar }) => {
   }, [searchValue, getMovies]);
 
   return (
-    <div className="classes.blocSearchBar">
+    <div className={classes.blocSearchBar}>
       <Paper
         component="form"
         onSubmit={submit}

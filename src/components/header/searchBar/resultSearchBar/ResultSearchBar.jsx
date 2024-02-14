@@ -35,7 +35,7 @@ const ResultSearchBar = ({
       zIndex: "300",
       cursor: "pointer",
       // marginTop:'50px',
-      marginLeft: "10px",
+      // marginLeft: "10px",
     },
     listItemClose: {
       display: "none",

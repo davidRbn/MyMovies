@@ -16,12 +16,15 @@ import styles from "../styles/styles";
 
 const Header = () => {
   const [searchBar, setSearchBar] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
+
   // eslint-disable-next-line no-unused-vars
   const [state, dispatch] = useContext(AuthContext);
   let history = useHistory();
 
   const searchBarDisplay = (e) => {
     e.preventDefault();
+    setSearchValue("");
     setSearchBar(!searchBar);
   };
 
@@ -68,7 +71,12 @@ const Header = () => {
                 MYmovies
               </Link>
             </Typography>
-            <SearchBar searchBar={searchBar} />
+            <SearchBar
+              searchBar={searchBar}
+              searchValue={searchValue}
+              setSearchValue={setSearchValue}
+              searchBarDisplay={searchBarDisplay}
+            />
             {state.isAuthenticated && (
               <Button
                 onClick={(e) => viewFavoris(e)}
